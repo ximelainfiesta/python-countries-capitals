@@ -54,7 +54,7 @@
 Enter the directory of your project and run `nosetests` in the terminal. The code should work perfectly.
 
 #Reflection Questions!
-Answer the following questions in the [reflection.txt](README.md) file.
+Answer the following questions in the [reflection.txt](reflection.txt) file.
 	
 	1. What did you learn in this lesson?
 	2. Explain how you solved the storage of data.
