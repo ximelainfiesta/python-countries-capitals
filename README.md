@@ -1,6 +1,7 @@
 # Countries and Capitals
-	The goal for this project is that you can do the following, remember that
-	you must meet each of the requirements.
+	The goal for this project is that you can save, sort, show and send data 
+	by email entered by the user, remember that you must meet each of the 
+	requirements, then we show you what you should make.
 
 #### **Cuntry:**
 	After receiving this command the program should ask the name of
@@ -51,4 +52,13 @@
 
 # Running tests
 Enter the directory of your project and run `nosetests` in the terminal. The code should work perfectly.
+
+#Reflection Questions!
+Answer the following questions in the [reflection.txt](README.md) file.
+	
+	1. What did you learn in this lesson?
+	2. Explain how you solved the storage of data.
+	3. What is a dictionary and because it is important?
+	4. Explain how you solved the sort data.
+	5. What are the best practices followed to build your application?
 
