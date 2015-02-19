@@ -3,7 +3,7 @@
 	by email entered by the user, remember that you must meet each of the 
 	requirements, then we show you what you should make.
 
-#### **Cuntry:**
+#### **Country:**
 	After receiving this command the program should ask the name of
 	country and expect the corresponding input, as a second step should ask the
 	name of the capital I just enter and wait for input
