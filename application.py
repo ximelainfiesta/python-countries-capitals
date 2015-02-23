@@ -1,5 +1,8 @@
 #Python Capitals and self.countries
 
+import os
+import sys
+
 class ConCap(object):
 
 	def __init__(self):
@@ -11,13 +14,24 @@ class ConCap(object):
 		user_country = True
 		while user_country == True:
 			country = raw_input("Enter the Country: ")
-			country = country.lower() 
+			country = country.title() 
 			capital = raw_input("Enter the Capital: ")
-			capital = capital.lower()
-			if country.isalpha() == True and capital.isalpha() == True:
-				self.countries[country] = capital
+			capital = capital.title()
+			try:
+				country = float(country)
+				country = int(country)
+				capital = float(capital)
+				capital = int(capital)
+				print "Enter valid country and capital"
+			except (NameError, ValueError):
+				print ""
+				if len(country) <= 2 and len(capital) <= 2:
+					print "Enter a valid country and capital"
+				else:
+					self.countries[country] = capital
 				repeat = True
 				while repeat == True:
+					print "Thank you for adding a country with its capital"
 					again = raw_input("Do you want to enter another? Y/N: ")
 					again = again.lower()
 					try:
@@ -32,22 +46,21 @@ class ConCap(object):
 							print "Enter only Y or N"
 					except ValueError:
 						print "Only letter Y or N"
-			else:
-				print "Only letters"
+
 
 	def menu(self):
 		menu = True
 		while menu == True:
 			print """
-			-------------MENU-------------
-			Country
-			Countries
-			Capital
-			All
-			AllOrdered
-			AllMail
-			Exit
-			------------------------------
+			-----------------------MENU-----------------------
+			Country: Add a country with its capital
+			Countries: Show countries
+			Capital: Show capitals
+			All: Show countries with them capitals
+			AllOrdered: Show countries with capitals in order
+			AllMail: Send email with the list
+			Exit: get out
+			--------------------------------------------------
 			"""
 			option = raw_input(">")
 			option = option.lower()
@@ -67,6 +80,7 @@ class ConCap(object):
 							print self.countries[x]
 						user = False
 					elif option == "all":
+						print "List of all countries with capitals"
 						user = False
 					elif option == "allordered":
 						user = False
@@ -74,8 +88,8 @@ class ConCap(object):
 						user = False
 					elif option == "exit":
 						print "Bye Bye"
-						user = False
-						menu = False
+						sys.exit()
+
 					else:
 						print "Only write the above commands"
 				else:
