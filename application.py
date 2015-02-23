@@ -1,11 +1,10 @@
-#Python Capitals and Countries
-
-Countries = {}
+#Python Capitals and self.countries
 
 class ConCap(object):
 
 	def __init__(self):
-		pass
+		"""Saves in a dictionary"""
+		self.countries = {}
 		
 	def Add(self):
 		"""Adds the countries and capitals"""
@@ -16,12 +15,27 @@ class ConCap(object):
 			capital = raw_input("Enter the Capital: ")
 			capital = capital.lower()
 			if country.isalpha() == True and capital.isalpha() == True:
-				Countries[country] = capital
-				menu()
+				self.countries[country] = capital
+				repeat = True
+				while repeat == True:
+					again = raw_input("Do you want to enter another? Y/N: ")
+					again = again.lower()
+					try:
+						if again == "y":
+							repeat = False
+							user_country = True
+						elif again == "n":
+							repeat = False
+							user_country = False
+							self.menu()
+						else: 
+							print "Enter only Y or N"
+					except ValueError:
+						print "Only letter Y or N"
 			else:
 				print "Only letters"
 
-	def menu():
+	def menu(self):
 		menu = True
 		while menu == True:
 			print """
@@ -41,19 +55,16 @@ class ConCap(object):
 			while user == True:
 				if option.isalpha() == True:
 					if option == "country":
-						enter = ConCap()
-						enter.Add()
-
-
+						self.Add()
 					elif option == "countries":
-						print "List of Countries"
-						for i in Countries:
+						print "List of countries"
+						for i in self.countries:
 							print i
 						user = False
 					elif option == "capital":
 						print "List of Capitals"
-						for x in Countries:
-							print Countries[x]
+						for x in self.countries:
+							print self.countries[x]
 						user = False
 					elif option == "all":
 						user = False
@@ -65,12 +76,11 @@ class ConCap(object):
 						print "Bye Bye"
 						user = False
 						menu = False
-					
 					else:
 						print "Only write the above commands"
 				else:
 					print "Use only letters"
 				user = False
 
-
-menu()
+PRUEBA = ConCap()
+PRUEBA.menu()
