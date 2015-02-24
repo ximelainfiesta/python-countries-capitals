@@ -19,36 +19,38 @@ class ConCap(object):
             capital = raw_input("Enter the Capital: ")
             capital = capital.title()
             try:
-                country = float(country) #tries to convert this into numbers, to verifiy letters
+                country = float(country) #tries to convert this into numbers, to verify letters
                 country = int(country)
                 capital = float(capital)
                 capital = int(capital)
                 print "Enter valid country and capital"
-            except (NameError, ValueError):
+            except (NameError, ValueError, TypeError):
                 print ""
-                if len(country) <= 2 and len(capital) <= 2: #verifies lenght of the answer
+            try:
+                if len(country) <= 2 or len(capital) <= 2: #verifies lenght of the answer
                     print "Enter a valid country and capital"
-                elif country.isalnum() == True and capital.isalnum() == True: #verifies that the answer has alfanumeric answer
-                    print "Enter only letters"
+                elif country.isdigit() == True or capital.isdigit() == True: #verifies that the answer has alfanumeric answer
+                    print "Make sure to enter only letters"
                 else:
                     self.countries[country] = capital #adds the capital and country to the dictionary
-                repeat = True
-                while repeat == True:
                     print "Thank you for adding a country with its capital"
-                    again = raw_input("Do you want to enter another? Y/N: ") #asks to enter another
-                    again = again.lower()
-                    try:
-                        if again == "y":
-                            repeat = False
-                            user_country = True
-                        elif again == "n":
-                            repeat = False
-                            user_country = False
-                            self.menu()
-                        else:
-                            print "Enter only Y or N"
-                    except ValueError:
-                        print "Only letter Y or N"
+            except (TypeError, NameError, ValueError):
+                print "Not saved because of wrong entry"
+            repeat = True
+            while repeat == True:
+                again = raw_input("Do you want to enter another? Y/N: ") #asks to enter another
+                again = again.lower()
+                try:
+                    if again == "y":
+                        self.add()
+                    elif again == "n":
+                        repeat = False
+                        user_country = False
+                        self.menu()
+                    else:
+                        print "Enter only Y or N"
+                except ValueError:
+                    print "Only letter Y or N"
 
     def menu(self):
         """Runs the program with a menu """
@@ -62,6 +64,7 @@ Capital: Show capitals
 All: Show countries with them capitals
 AllOrdered: Show countries with capitals in order
 AllMail: Send email with the list
+Exit: ends the program
 --------------------------------------------------
 """
             option = raw_input(">")
@@ -74,17 +77,20 @@ AllMail: Send email with the list
                     elif option == "countries":
                         print "List of countries"
                         for i in self.countries:
-                            print i
+                            print "-", i
                         user = False
                     elif option == "capital":
                         print "List of Capitals"
                         for i in self.countries:
-                            print self.countries[i]
+                            print "-", self.countries[i]
                         user = False
                     elif option == "all":
                         print "List of all countries with capitals"
+                        for i in self.countries:
+                            print i, "-", self.countries[i]
                         user = False
                     elif option == "allordered":
+                        print "List of all countries with capitals in order"
                         user = False
                     elif option == "allmail":
                         user = False
