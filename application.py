@@ -15,27 +15,30 @@ class ConCap(object):
         user_country = True
         while user_country == True:
             country = raw_input("Enter the Country: ")
-            country = country.title() #capitalizes the asnwer
+            try:
+                text = country
+                for i in text:
+                    if i.isalpha() == True or i == " ":
+                        user_country = False
+                    else:
+                        print "Do not enter numbers"
+            except:
+                user_country = True
+        user_capital = True
+        while user_capital == True:
             capital = raw_input("Enter the Capital: ")
-            capital = capital.title()
             try:
-                country = float(country) #tries to convert this into numbers, to verify letters
-                country = int(country)
-                capital = float(capital)
-                capital = int(capital)
-                print "Enter valid country and capital"
-            except (NameError, ValueError, TypeError):
-                print ""
-            try:
-                if len(country) <= 2 or len(capital) <= 2: #verifies lenght of the answer
-                    print "Enter a valid country and capital"
-                elif country.isdigit() == True or capital.isdigit() == True: #verifies that the answer has alfanumeric answer
-                    print "Make sure to enter only letters"
-                else:
-                    self.countries[country] = capital #adds the capital and country to the dictionary
-                    print "Thank you for adding a country with its capital"
-            except (TypeError, NameError, ValueError):
-                print "Not saved because of wrong entry"
+                text = capital
+                for i in text:
+                    if i.isalpha() == True or i == " ":
+                        user_capital = False 
+                    else: 
+                        print "Do not enter numbers"
+            except:
+                user_capital = True
+            self.countries[country] = capital
+            print "Thanks for adding"
+
             repeat = True
             while repeat == True:
                 again = raw_input("Do you want to enter another? Y/N: ") #asks to enter another
