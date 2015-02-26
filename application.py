@@ -3,35 +3,37 @@
 
 import sys #imports some functions like the one to end program
 
-class ConCap(object): 
+class ConCap(object):
     """ This Program saves in a dictionary, countries with capitals """
 
     def __init__(self):
         """Saves in a dictionary"""
-        self.countries = {} #a dictionary with self
+        self.countries = {}
+        #a dictionary with self
 
     def add(self):
         """adds the countries and capitals"""
-        user_country = True
+        user_country = True #variable to repeat or stop the loop
         while user_country == True:
             country = raw_input("Enter the Country: ")
             try:
-                text = country
-                variable = True
+                text = country #turn into a string
+                variable = True #another variable to verify
                 for i in text:
-                    if i.isalpha() == True or i == " ":
-                        if variable == True:
-                            variable = True
+                    if i.isalpha() == True or i == " ": #if the string is alfhabet
+                        if variable == True: #if variable is true
+                            variable = True #make it true
                     else:
-                        variable = False
-                if variable == False:
-                    print "Do not enter numbers"
+                        variable = False #else, make it false
+                if variable == False: #if variable is false
+                    print "Do not enter numbers" #print message
                     user_country = True
+                    #convert the original variable in true so it can repeat itself
                 else:
-                    user_country = False
-            except:
-                print "-Do not enter numbers"
-        user_capital = True
+                    user_country = False #if not, kill this part and go on
+            except (ValueError, NameError, SyntaxError):
+                print "-Do not enter numbers" #just verifies, any possible mistake
+        user_capital = True #everything above
         while user_capital == True:
             capital = raw_input("Enter the Capital: ")
             try:
@@ -48,23 +50,24 @@ class ConCap(object):
                     user_capital = True
                 else:
                     user_capital = False
-            except:
+            except (ValueError, NameError, SyntaxError):
                 print "-Do not enter numbers"
-
+# I must keep close attention to identation, when they stop verifying
+#they will add them to the dictionary
         self.countries[country] = capital
         print "Thank you for adding a country with its capital"
-
-        repeat = True
+#This whole part verifies if the user wants to add another
+        repeat = True  #variable to kill
         while repeat == True:
             again = raw_input("Do you want to enter another? Y/N: ") #asks to enter another
             again = again.lower()
             try:
                 if again == "y":
-                    self.add()
+                    self.add() #it ifs yes, it returns
                 elif again == "n":
-                    repeat = False
-                    user_country = False
-                    self.menu()
+                    repeat = False #if no, kills this part
+                    user_country = False #kills the other variable above
+                    self.menu() #goes to the menu
                 else:
                     print "Enter only Y or N"
             except ValueError:
@@ -87,39 +90,42 @@ Exit: ends the program
 """
             option = raw_input(">")
             option = option.lower()
-            user = True
+            user = True #variable to kill
             while user == True:
-                if option.isalpha() == True:
+                if option.isalpha() == True: #if the answer is in letters
                     if option == "country":
-                        self.add()
+                        self.add() #calls the method to add a country
                     elif option == "countries":
                         print "List of countries"
-                        for i in self.countries:
-                            print "-", i
-                        user = False
+                        for i in self.countries: #lists the countries
+                            print "-", i #prints a dash and the countries
+                        user = False #kills the operation to return to the menu
                     elif option == "capital":
                         print "List of Capitals"
                         for i in self.countries:
-                            print "-", self.countries[i]
-                        user = False
+                            print "-", self.countries[i] #prints a dash and the items
+                        user = False #kills the operation to return to the menu
                     elif option == "all":
                         print "List of all countries with capitals"
                         for i in self.countries:
-                            print i, "-", self.countries[i]
-                        user = False
+                            print i, "-", self.countries[i] #prints the keys, dash and the items
+                        user = False #kills the operation to return to the menu
                     elif option == "allordered":
                         print "List of all countries with capitals in order"
-                        user = False
+                        for key, value in sorted(self.countries.iteritems(), key=lambda (k, v): (v, k)):
+                            print "%s - %s" % (key, value)#internet way to sort a dic by its values
+                        user = False #kills the operation to return to the menu
                     elif option == "allmail":
-                        user = False
+                        user = False #kills the operation to return to the menu
                     elif option == "exit":
                         print "Bye Bye"
-                        sys.exit()
+                        sys.exit() #command to exit the program
                     else:
                         print "Only write the above commands"
                 else:
                     print "Use only letters"
-                user = False
+                user = False #if the program gets in a loop, it stops it
+
 
 PRUEBA = ConCap()
 PRUEBA.menu()
