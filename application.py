@@ -3,12 +3,17 @@
 
 import sys #imports some functions like the one to end program
 
+import smtplib #modules to send email
+from email.MIMEMultipart import MIMEMultipart
+from email.MIMEText import MIMEText
+
+
 class ConCap(object):
     """ This Program saves in a dictionary, countries with capitals """
 
     def __init__(self):
         """Saves in a dictionary"""
-        self.countries = {}
+        self.countries = {"blah" : "hola", "jaja" : "haguhe"}
         #a dictionary with self
 
     def add(self):
@@ -73,6 +78,38 @@ class ConCap(object):
             except ValueError:
                 print "Only letter Y or N"
 
+    def email(self): #method copied from internet
+        """send email with the countries and capitals."""
+        username = "ximena.lainfiesta@gmail.com"
+        password =  "saSA12!@"
+        adress  = "lgarcia@cognits.co"
+        body = "Countries and Capitals: "
+
+        # Body of email
+        for key, item in self.countries.items():
+            body += " " + str(key) + " - " + str(item)
+
+        # Forming the body of email
+        msg = MIMEMultipart()
+        msg['From'] = username
+        msg['To'] = adress
+        msg['Subject'] = "Countries and capitals by Ximena Lainfiesta"
+        msg.attach(MIMEText(body,'plain'))
+
+        # This try controls if the email was sent
+        try:
+            server = smtplib.SMTP("smtp.gmail.com", 587)
+            server.starttls()
+            server.login(username,password)
+            text = msg.as_string()
+            server.sendmail(username, adress, text)
+            server.quit()
+            print "Email sent correctly"
+            raw_input("Press enter to continue...")
+        except:
+            print "Error ocurred"
+
+
     def menu(self):
         """Runs the program with a menu """
         menu = True
@@ -116,6 +153,7 @@ Exit: ends the program
                             print "%s - %s" % (key, value)#internet way to sort a dic by its values
                         user = False #kills the operation to return to the menu
                     elif option == "allmail":
+                        self.email()
                         user = False #kills the operation to return to the menu
                     elif option == "exit":
                         print "Bye Bye"
