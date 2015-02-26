@@ -17,43 +17,58 @@ class ConCap(object):
             country = raw_input("Enter the Country: ")
             try:
                 text = country
+                variable = True
                 for i in text:
                     if i.isalpha() == True or i == " ":
-                        user_country = False
+                        if variable == True:
+                            variable = True
                     else:
-                        print "Do not enter numbers"
+                        variable = False
+                if variable == False:
+                    print "Do not enter numbers"
+                    user_country = True
+                else:
+                    user_country = False
             except:
-                user_country = True
+                print "-Do not enter numbers"
         user_capital = True
         while user_capital == True:
             capital = raw_input("Enter the Capital: ")
             try:
                 text = capital
+                variable = True
                 for i in text:
                     if i.isalpha() == True or i == " ":
-                        user_capital = False 
-                    else: 
-                        print "Do not enter numbers"
-            except:
-                user_capital = True
-            self.countries[country] = capital
-            print "Thanks for adding"
-
-            repeat = True
-            while repeat == True:
-                again = raw_input("Do you want to enter another? Y/N: ") #asks to enter another
-                again = again.lower()
-                try:
-                    if again == "y":
-                        self.add()
-                    elif again == "n":
-                        repeat = False
-                        user_country = False
-                        self.menu()
+                        if variable == True:
+                            variable = True
                     else:
-                        print "Enter only Y or N"
-                except ValueError:
-                    print "Only letter Y or N"
+                        variable = False
+                if variable == False:
+                    print "Do not enter numbers"
+                    user_capital = True
+                else:
+                    user_capital = False
+            except:
+                print "-Do not enter numbers"
+
+        self.countries[country] = capital
+        print "Thank you for adding a country with its capital"
+
+        repeat = True
+        while repeat == True:
+            again = raw_input("Do you want to enter another? Y/N: ") #asks to enter another
+            again = again.lower()
+            try:
+                if again == "y":
+                    self.add()
+                elif again == "n":
+                    repeat = False
+                    user_country = False
+                    self.menu()
+                else:
+                    print "Enter only Y or N"
+            except ValueError:
+                print "Only letter Y or N"
 
     def menu(self):
         """Runs the program with a menu """
