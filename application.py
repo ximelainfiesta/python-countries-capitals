@@ -1,10 +1,11 @@
+
 # -*- coding: utf-8 -*
 
 """COUNTRIES AND CAPITALS """
 
 
 import sys #imports some functions like the one to end program
-enc = sys.stdin.encoding
+
 
 
 import smtplib #modules to send email
@@ -24,10 +25,10 @@ class ConCap(object):
         """adds the countries and capitals"""
         user_country = True #variable to repeat or stop the loop
         while user_country == True:
-            country = raw_input("Enter the Country: ").decode(enc)
+            country = raw_input("Enter the Country: ")
             country = country.title()
             try:
-                text = country #turn into a string
+                text = country.decode("utf-8") #turn into a string
                 variable = True #another variable to verify
                 for i in text:
                     if i.isalpha() == True or i == " ": #if the string is alfhabet
@@ -45,10 +46,10 @@ class ConCap(object):
                 print "-Do not enter numbers" #just verifies, any possible mistake
         user_capital = True #everything above
         while user_capital == True:
-            capital = raw_input("Enter the Capital: ").decode(enc)
+            capital = raw_input("Enter the Capital: ")
             capital = capital.title()
             try:
-                text = capital
+                text = capital.decode("utf-8")
                 variable = True
                 for i in text:
                     if i.isalpha() == True or i == " ":
