@@ -1,1 +1,13 @@
-Write your answers here!
+1. What did you learn in this lesson?
+-I learned how to involve functions in my code and to somehow put it inside a class. Also how to fix unicode problems, to make the answers titles and how to send emails.
+2. Explain how you solved the storage of data.
+-I created an empty dictionary and if the input data had everything necessary, it would get saved inside the dictionary. 
+3. What is a dictionary and because it is important?
+-A dictionary is an element inside python that helps me storage keys and items, this items may be lists, strings, or numbers. It doesnt order the elements though.
+4. Explain how you solved the sort data.
+-I searched in the internet ways to sort it, and I used a for loop that evaluated both key and items and then I used the function sorted, and later on I just printed them in the order. 
+5. What are the best practices followed to build your application?
+-First, documenting everything. 
+-Second, have an order to code
+-Third, use functions to recycle code
+

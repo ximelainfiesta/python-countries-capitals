@@ -1,7 +1,11 @@
-#Python Capitals and self.countries
+# -*- coding: utf-8 -*
+
 """COUNTRIES AND CAPITALS """
 
+
 import sys #imports some functions like the one to end program
+enc = sys.stdin.encoding
+
 
 import smtplib #modules to send email
 from email.MIMEMultipart import MIMEMultipart
@@ -13,14 +17,15 @@ class ConCap(object):
 
     def __init__(self):
         """Saves in a dictionary"""
-        self.countries = {"blah" : "hola", "jaja" : "haguhe"}
+        self.countries = {}
         #a dictionary with self
 
     def add(self):
         """adds the countries and capitals"""
         user_country = True #variable to repeat or stop the loop
         while user_country == True:
-            country = raw_input("Enter the Country: ")
+            country = raw_input("Enter the Country: ").decode(enc)
+            country = country.title()
             try:
                 text = country #turn into a string
                 variable = True #another variable to verify
@@ -40,7 +45,8 @@ class ConCap(object):
                 print "-Do not enter numbers" #just verifies, any possible mistake
         user_capital = True #everything above
         while user_capital == True:
-            capital = raw_input("Enter the Capital: ")
+            capital = raw_input("Enter the Capital: ").decode(enc)
+            capital = capital.title()
             try:
                 text = capital
                 variable = True
@@ -81,26 +87,27 @@ class ConCap(object):
     def email(self): #method copied from internet
         """send email with the countries and capitals."""
         username = "ximena.lainfiesta@gmail.com"
-        password =  "saSA12!@"
-        adress  = "lgarcia@cognits.co"
+        password = "saSA12!@"
+        adress = "lgarcia@cognits.co"
         body = "Countries and Capitals: "
 
         # Body of email
         for key, item in self.countries.items():
-            body += " " + str(key) + " - " + str(item)
+            body += """
+            """ + str(key) + " - " + str(item)
 
         # Forming the body of email
         msg = MIMEMultipart()
         msg['From'] = username
         msg['To'] = adress
         msg['Subject'] = "Countries and capitals by Ximena Lainfiesta"
-        msg.attach(MIMEText(body,'plain'))
+        msg.attach(MIMEText(body, 'plain'))
 
         # This try controls if the email was sent
         try:
             server = smtplib.SMTP("smtp.gmail.com", 587)
             server.starttls()
-            server.login(username,password)
+            server.login(username, password)
             text = msg.as_string()
             server.sendmail(username, adress, text)
             server.quit()
@@ -108,7 +115,6 @@ class ConCap(object):
             raw_input("Press enter to continue...")
         except:
             print "Error ocurred"
-
 
     def menu(self):
         """Runs the program with a menu """
