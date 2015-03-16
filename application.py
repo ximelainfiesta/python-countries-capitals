@@ -88,7 +88,7 @@ class ConCap(object):
     def email(self): #method copied from internet
         """send email with the countries and capitals."""
         username = "ximena.lainfiesta@gmail.com"
-        password = "saSA12!@"
+        password = ""
         adress = "lgarcia@cognits.co"
         body = "Countries and Capitals: "
 
